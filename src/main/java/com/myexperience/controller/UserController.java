@@ -42,4 +42,16 @@ public class UserController
 		return userService.add(user);
 		
 	}
+
+	@RequestMapping(value = "/user/login", method = RequestMethod.GET)
+	public ResponseEntity<List<User>> logintolist(
+			@ApiParam(name = "version", defaultValue = "v1") @PathVariable("version") String version,
+			@ApiParam(name = "username", defaultValue ="m") @PathVariable("username") String  username,
+			@ApiParam(name = "password",defaultValue = "1") @PathVariable("password") String password
+	)
+	{
+
+		List<User> userList=userService.login(username,password);
+		return new ResponseEntity<List<User>>(userList,HttpStatus.OK);
+	}
 }
